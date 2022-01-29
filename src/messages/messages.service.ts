@@ -1,30 +1,23 @@
-import { readFile, writeFile } from 'fs/promises';
+import { MessagesRepository } from './messages.repository';
 
-export class MessagesRepository {
-  async findOne(id: string) {
-    const contents = await readFile('messages.json', 'utf8');
-    const messages = JSON.parse(contents);
+export class MessagesService {
+  messagesRepo: MessagesRepository;
 
-    return messages[id];
+  constructor() {
+    // Service is creating its own dependencies
+    // DONT DO THIS ON REAL APPS
+    this.messagesRepo = new MessagesRepository();
   }
 
-  async findAll() {
-    const contents = await readFile('messages.json', 'utf8');
-    const messages = JSON.parse(contents);
-
-    return messages;
+  findOne(id: string) {
+    return this.messagesRepo.findOne(id);
   }
 
-  async create(content: string) {
-    const contents = await readFile('messages.json', 'utf8');
-    const messages = JSON.parse(contents);
+  findAll() {
+    return this.messagesRepo.findAll();
+  }
 
-    const id = Math.floor(Math.random() * 999);
-    messages[id] = {
-      id,
-      content,
-    };
-
-    await writeFile('messages.json', JSON.stringify(messages));
+  create(content: string) {
+    return this.messagesRepo.create(content);
   }
 }
