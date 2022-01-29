@@ -15,4 +15,9 @@ describe('MessagesController', () => {
   it('should be defined', () => {
     expect(controller).toBeDefined();
   });
+
+  // Get '/' should return a message 'This is the messages list'
+  it('should return a message "This is the messages list"', () => {
+    expect(controller.listMessages()).toBe('This is the messages list');
+  })
 });

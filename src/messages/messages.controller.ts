@@ -5,7 +5,7 @@ import { CreateMessageDto } from './dtos/create-message.dto';
 export class MessagesController {
   @Get()
   listMessages() {
-    // return 'This action returns all messages';
+    return 'This is the messages list';
   }
 
   @Post()
